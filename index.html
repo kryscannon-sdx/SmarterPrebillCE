@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worklist Navigation — Practice</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="training-app">
+    <!-- Training guidance: keep copy and controls here, not in the product sim -->
+    <aside class="guidance-panel" aria-label="Activity guidance">
+      <p class="practice-label">Practice</p>
+      <h1 class="activity-title">Worklist Navigation</h1>
+      <span class="title-accent" aria-hidden="true"></span>
+      <p class="activity-intro" id="activity-intro"></p>
+
+      <div class="task-box" id="task-box">
+        <div class="task-step-badge" id="task-step-badge" aria-hidden="true">1</div>
+        <div class="task-copy">
+          <h2 class="task-heading" id="task-heading"></h2>
+          <div class="task-text" id="task-text"></div>
+        </div>
+      </div>
+
+      <div class="guidance-actions" id="guidance-actions"></div>
+
+      <ol class="progress-list" id="progress-list" aria-label="Activity progress"></ol>
+    </aside>
+
+    <!-- Simulated product: visual fidelity lives here -->
+    <section class="simulator-panel" id="simulator-panel" aria-label="SmarterPrebill worklist simulation">
+      <div class="product-app" id="product-app">
+        <header class="product-header">
+          <div class="product-brand">
+            <span class="product-wordmark">SmarterDx</span>
+          </div>
+          <nav class="product-nav" aria-label="Product sections">
+            <span class="product-nav-item is-active">Cases</span>
+            <span class="product-nav-item">Metrics</span>
+            <span class="product-nav-item">Denials</span>
+          </nav>
+          <div class="product-user" aria-hidden="true">
+            <span class="product-user-icon"></span>
+            <span id="product-user-name"></span>
+            <span class="chevron"></span>
+          </div>
+        </header>
+
+        <div class="worklist-toolbar">
+          <div class="worklist-search" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" focusable="false">
+              <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M15.5 15.5 L20 20" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <div class="worklist-tabs" id="worklist-tabs" role="tablist" aria-label="Worklists"></div>
+        </div>
+
+        <div class="filter-bar" id="filter-bar" aria-hidden="true"></div>
+
+        <div class="worklist" id="worklist"></div>
+
+        <div class="product-help" aria-hidden="true">?</div>
+      </div>
+
+      <div class="training-overlay" id="training-overlay" hidden>
+        <div class="training-confirm-card" id="training-confirm-card" role="dialog" aria-modal="true" aria-labelledby="overlay-title" aria-describedby="overlay-body">
+          <h2 class="overlay-title" id="overlay-title"></h2>
+          <div class="overlay-body" id="overlay-body"></div>
+          <button type="button" class="guidance-btn" id="overlay-action"></button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="training-overlay is-fullpage" id="orient-overlay">
+    <div class="training-confirm-card is-orient" role="dialog" aria-modal="true" aria-labelledby="orient-title" aria-describedby="orient-body">
+      <p class="orient-kicker">Practice</p>
+      <h2 class="overlay-title" id="orient-title">Start with your worklist</h2>
+      <div class="overlay-body" id="orient-body">
+        <p>When you sign in to SmarterPrebill, you’ll land on the Pending worklist. This is your starting point when you’re ready to review recommendations.</p>
+        <p>In this activity, you’ll get familiar with the four worklists and how they support different points in the review process.</p>
+        <p>The directions for each step will appear in the instructions panel on the left as you move through the SmarterPrebill simulation.</p>
+      </div>
+      <button type="button" class="guidance-btn" id="orient-action">Get Started</button>
+    </div>
+  </div>
+
+  <div class="sr-live" id="sr-live" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="worklist-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
