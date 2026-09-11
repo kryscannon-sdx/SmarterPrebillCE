@@ -2,7 +2,7 @@
   "use strict";
 
   const worklistApi = window.SPBWorklist;
-  const HIGHLIGHT_DELAY = 4500;
+  const HIGHLIGHT_DELAY = 1000;
 
   const TRAINING_COPY = {
     intro:
@@ -248,8 +248,7 @@
   function patientIcon() {
     return (
       '<svg class="patient-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
-      '<circle cx="12" cy="8" r="3.2" fill="currentColor"/>' +
-      '<path d="M5.5 19c.8-4 4-6 6.5-6s5.7 2 6.5 6" fill="currentColor"/>' +
+      '<path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>' +
       "</svg>"
     );
   }
@@ -301,25 +300,70 @@
     });
   }
 
+  function materialCaret() {
+    return (
+      '<svg class="mui-caret" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+      '<path d="M7 10l5 5 5-5z" fill="currentColor"/>' +
+      "</svg>"
+    );
+  }
+
+  function materialStar() {
+    return (
+      '<svg class="star-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+      '<path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>' +
+      "</svg>"
+    );
+  }
+
+  function materialSort() {
+    return (
+      '<svg class="filter-sort-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+      '<path fill="currentColor" d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/>' +
+      "</svg>"
+    );
+  }
+
   function renderFilterBar() {
     const meta = worklistApi.getWorklist(state.worklist.activeWorklist);
-    const assigned = meta.assignedToIsFilter
-      ? 'Assigned to <strong>' + meta.assignedTo + '</strong><span class="chevron"></span>'
-      : "Assigned to " + meta.assignedTo;
+    const caret = materialCaret();
+    const assigned =
+      'Assigned to <span class="filter-assigned-value">' +
+      meta.assignedTo +
+      "</span>" +
+      (meta.assignedToIsFilter ? caret : "");
 
     els.filterBar.innerHTML =
       '<div class="filter-left">' +
-      '<span class="filter-assigned">' + assigned + "</span>" +
-      '<span class="filter-count">' + meta.casesInView + " Cases in View</span>" +
+      '<span class="filter-assigned">' +
+      assigned +
+      "</span>" +
+      '<span class="filter-count">' +
+      meta.casesInView +
+      " Cases in View</span>" +
       "</div>" +
       '<div class="filter-right">' +
-      '<span class="star-icon" aria-hidden="true">☆</span>' +
-      '<span class="filter-chip">Status <span class="chevron"></span></span>' +
-      '<span class="filter-chip">Impact <span class="chevron"></span></span>' +
-      '<span class="filter-chip"><span class="filter-sort-icon" aria-hidden="true"></span> Discharge Date <span class="chevron"></span></span>' +
+      materialStar() +
+      '<span class="filter-divider" aria-hidden="true"></span>' +
+      '<span class="filter-select"><span class="filter-control">Status</span>' +
+      caret +
+      "</span>" +
+      '<span class="filter-divider" aria-hidden="true"></span>' +
+      '<span class="filter-select"><span class="filter-control">Impact</span>' +
+      caret +
+      "</span>" +
+      '<span class="filter-divider" aria-hidden="true"></span>' +
+      '<span class="filter-sort">' +
+      materialSort() +
+      " Discharge Date" +
+      caret +
+      "</span>" +
+      '<span class="filter-divider" aria-hidden="true"></span>' +
       '<span class="set-default">' +
       '<span class="set-default-label">Set Default</span>' +
-      '<span class="set-default-caret" aria-hidden="true"></span>' +
+      '<span class="set-default-caret" aria-hidden="true">' +
+      caret +
+      "</span>" +
       "</span>" +
       "</div>";
   }
@@ -383,8 +427,12 @@
       '<button type="button" class="review-btn" tabindex="-1" aria-disabled="true">Review</button>' +
       "</div>" +
       '<div class="assignment-meta">' +
+      (caseData.financialClass
+        ? "<div>Financial class: " + caseData.financialClass + "</div>"
+        : "") +
       "<div>Assigned to " + caseData.assignedTeam + "</div>" +
-      '<div>' + caseData.activity + ' • <span class="product-link">All Activity</span></div>' +
+      (caseData.coded ? "<div>Coded " + caseData.coded + "</div>" : "") +
+      "<div>" + caseData.activity + ' • <span class="product-link">All Activity</span></div>' +
       "</div>";
 
     card.appendChild(left);

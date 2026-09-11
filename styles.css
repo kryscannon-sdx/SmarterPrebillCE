@@ -39,7 +39,7 @@
   --status-query: #c05621;
   --status-query-bg: #fef6e9;
   --tag-drg: #3d6db5;
-  --tag-poa: #c05621;
+  --tag-poa: #e67e22;
   --tag-purple: #6b5ca5;
   --tag-clinical: #c5221f;
   --empty-teal: #2aa8a3;
@@ -335,43 +335,44 @@ button {
 .product-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 10px 20px;
+  gap: 0;
+  padding: 8px 20px;
+  min-height: 48px;
   border-bottom: 1px solid var(--product-line);
 }
 
 .product-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
   min-width: 0;
 }
 
 .product-logo {
-  display: none;
-}
-
-.product-wordmark {
-  color: var(--product-header-text);
-  font-weight: 650;
-  font-size: 0.95rem;
+  display: block;
+  height: 20px;
+  width: auto;
 }
 
 .product-nav {
   display: flex;
-  gap: 22px;
+  align-items: center;
+  gap: 4px;
+  margin-left: 20px;
 }
 
 .product-nav-item {
-  color: var(--product-header-text);
-  padding-bottom: 4px;
+  color: #5f6368;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 .product-nav-item.is-active {
-  color: var(--product-blue);
-  font-weight: 650;
-  box-shadow: inset 0 -2px 0 var(--product-blue);
+  background: #e8f1fc;
+  color: #202124;
+  font-weight: 500;
 }
 
 .product-user {
@@ -385,28 +386,15 @@ button {
 .product-user-icon {
   width: 22px;
   height: 22px;
-  border-radius: 50%;
-  background: #e8eaed;
-  position: relative;
+  color: #9aa0a6;
+  display: grid;
+  place-items: center;
 }
 
-.product-user-icon::before {
-  content: "";
-  position: absolute;
-  inset: 5px 6px 8px;
-  border-radius: 50%;
-  background: #9aa0a6;
-}
-
-.product-user-icon::after {
-  content: "";
-  position: absolute;
-  left: 4px;
-  right: 4px;
-  bottom: 3px;
-  height: 7px;
-  border-radius: 8px 8px 0 0;
-  background: #9aa0a6;
+.product-user-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
 }
 
 .chevron {
@@ -466,13 +454,12 @@ button {
 .filter-bar {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  align-items: center;
+  gap: 12px 20px;
   flex-wrap: wrap;
-  margin: 0 20px 8px;
-  padding: 8px 10px;
-  border: 1px solid var(--product-border);
-  border-radius: 4px;
-  color: var(--product-muted);
+  margin: 2px 20px 10px;
+  padding: 0;
+  color: #5f6368;
 }
 
 .filter-left,
@@ -480,85 +467,130 @@ button {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+}
+
+.filter-right {
+  gap: 8px;
 }
 
 .filter-assigned {
   display: inline-flex;
   align-items: center;
+  gap: 2px;
+  min-height: 28px;
+  padding: 3px 6px 3px 10px;
+  background: #eaf3fc;
+  border-radius: 4px;
+  color: #5f6368;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
-.filter-assigned strong {
+.filter-assigned-value {
   color: var(--product-blue);
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .filter-count {
   color: var(--product-blue);
-  font-weight: 650;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
-.filter-chip {
+.filter-divider {
+  width: 1px;
+  height: 22px;
+  background: #d0d4d8;
+  flex: 0 0 auto;
+}
+
+.filter-select {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 0;
 }
 
-.filter-chip .chevron,
-.filter-assigned .chevron {
-  border-top-color: #5f6368;
-  margin-left: 4px;
+.filter-control {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 3px 10px;
+  background: #f3f4f6;
+  border-radius: 4px;
+  color: #5f6368;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.filter-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  color: #5f6368;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.mui-caret {
+  width: 18px;
+  height: 18px;
+  color: #80868b;
+  flex: 0 0 auto;
 }
 
 .set-default {
   display: inline-flex;
   align-items: stretch;
   height: 28px;
-  color: var(--unassigned);
-  border: 1px solid #d0d4d8;
+  color: #80868b;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
   overflow: hidden;
-  background: #fff;
+  background: #fafafa;
 }
 
 .set-default-label {
   display: inline-flex;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 12px;
   white-space: nowrap;
+  font-size: 13px;
 }
 
 .set-default-caret {
-  width: 26px;
-  border-left: 1px solid #d0d4d8;
+  width: 28px;
+  border-left: 1px solid #e0e0e0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  background: #f5f5f5;
 }
 
-.set-default-caret::after {
-  content: "";
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 5px solid #9aa0a6;
+.set-default-caret .mui-caret {
+  width: 20px;
+  height: 20px;
 }
 
 .filter-sort-icon {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background:
-    linear-gradient(#5f6368, #5f6368) 0 1px / 10px 1.5px no-repeat,
-    linear-gradient(#5f6368, #5f6368) 0 4.5px / 7px 1.5px no-repeat,
-    linear-gradient(#5f6368, #5f6368) 0 8px / 4px 1.5px no-repeat;
+  width: 18px;
+  height: 18px;
+  color: #9aa0a6;
+  flex: 0 0 auto;
 }
 
 .star-icon {
-  color: var(--product-faint);
-  font-size: 14px;
-  line-height: 1;
+  width: 18px;
+  height: 18px;
+  color: #c4c4c4;
+  display: block;
+  flex: 0 0 auto;
 }
 
 
@@ -625,7 +657,7 @@ button {
   margin: 0;
   color: var(--product-muted);
   font-size: 12px;
-  line-height: 1.45;
+  line-height: 1.55;
 }
 
 .patient-meta div,
@@ -642,11 +674,15 @@ button {
 }
 
 .status-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 650;
+  border-radius: 2px;
+  border: 1px solid #e8eaed;
+  background: #f1f3f4;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 .status-date {
@@ -656,12 +692,12 @@ button {
 
 .status-teal {
   color: var(--status-teal);
-  background: var(--status-teal-bg);
+  background: #f1f3f4;
 }
 
 .status-query {
   color: var(--status-query);
-  background: var(--status-query-bg);
+  background: #f1f3f4;
 }
 
 .diagnosis {
@@ -675,14 +711,22 @@ button {
 .clinical-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   margin-bottom: 12px;
-  font-size: 12px;
-  font-weight: 650;
 }
 
 .tag {
+  display: inline-flex;
+  align-items: center;
+  background: #f1f3f4;
+  border: 1px solid #e8eaed;
+  border-radius: 2px;
+  padding: 2px 8px;
+  min-height: 22px;
   color: var(--tag);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 .tag-drg {
@@ -942,6 +986,16 @@ button {
 
   .product-header {
     flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  .product-nav {
+    margin-left: 12px;
+  }
+
+  .filter-bar {
+    margin-left: 12px;
+    margin-right: 12px;
   }
 }
 
