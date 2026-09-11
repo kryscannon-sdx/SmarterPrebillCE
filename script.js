@@ -526,7 +526,7 @@
         if (button) {
           button.classList.remove("is-pulsing");
         }
-      }, 800);
+      }, 2100);
     }
   }
 

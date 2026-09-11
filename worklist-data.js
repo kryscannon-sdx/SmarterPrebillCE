@@ -141,6 +141,8 @@
         showVisitLink: false,
         reviewer: "Demitra Frank",
         assignedTeam: "CDI",
+        financialClass: "Commercial",
+        coded: "Mar 4, 2022 by Ryan Alvarez",
         activity: "Last activity Sep 13, 2023 by SmarterDx"
       },
       {
@@ -163,6 +165,8 @@
         showVisitLink: true,
         reviewer: "Demitra Frank",
         assignedTeam: "CDI",
+        financialClass: "Medicare FFS",
+        coded: "Apr 11, 2022 by Abby Nwangwa",
         activity: "Last activity Feb 14, 2024 by SmarterDx"
       },
       {
@@ -186,6 +190,8 @@
         showVisitLink: false,
         reviewer: "Scott Wilson",
         assignedTeam: "CDI",
+        financialClass: "Medicaid HMO",
+        coded: "May 6, 2022 by Alex Banks",
         activity: "Last activity Nov 20, 2023 by SmarterDx"
       }
     ],

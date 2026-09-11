@@ -239,7 +239,7 @@ button {
 }
 
 .guidance-btn.is-training-target.is-pulsing {
-  animation: continue-cue-pulse 0.7s ease-out 1;
+  animation: continue-cue-pulse 0.7s ease-out 3;
 }
 
 .task-box.is-attention-cue {
