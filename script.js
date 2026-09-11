@@ -69,6 +69,10 @@
     overlay: "orient",
     targetVisible: false,
     tabCuePulse: false,
+    continueCue: false,
+    continueCuePulse: false,
+    panelCue: false,
+    panelCuePulse: false,
     worklist: worklistApi.createWorklistState("pending")
   };
 
@@ -178,6 +182,8 @@
     els.taskText.textContent = "";
     els.taskBox.classList.toggle("is-check", state.phase === STATES.QUICK_CHECK);
     els.taskBox.classList.toggle("is-complete", state.phase === STATES.COMPLETE);
+    els.taskBox.classList.toggle("is-attention-cue", state.phase === STATES.QUICK_CHECK && state.panelCue);
+    els.taskBox.classList.toggle("is-pulsing", state.phase === STATES.QUICK_CHECK && state.panelCuePulse);
 
     if (state.phase === STATES.ORIENTING || state.phase === STATES.PENDING) {
       els.taskBadge.textContent = "1";
@@ -209,6 +215,12 @@
       const button = document.createElement("button");
       button.type = "button";
       button.className = "guidance-btn";
+      if (state.continueCue) {
+        button.classList.add("is-training-target");
+      }
+      if (state.continueCuePulse) {
+        button.classList.add("is-pulsing");
+      }
       button.textContent = "Continue";
       button.addEventListener("click", beginQuickCheck);
       els.actions.appendChild(button);
@@ -495,6 +507,38 @@
     }, HIGHLIGHT_DELAY);
   }
 
+  function revealContinueCue() {
+    if (state.phase !== STATES.ALL_CASES) {
+      return;
+    }
+    state.continueCue = true;
+    const button = els.actions.querySelector(".guidance-btn");
+    if (button) {
+      button.classList.add("is-training-target");
+    }
+    if (!prefersReducedMotion()) {
+      state.continueCuePulse = true;
+      if (button) {
+        button.classList.add("is-pulsing");
+      }
+      pulseTimer = window.setTimeout(function () {
+        state.continueCuePulse = false;
+        if (button) {
+          button.classList.remove("is-pulsing");
+        }
+      }, 800);
+    }
+  }
+
+  function scheduleContinueCue() {
+    clearTimers();
+    state.continueCue = false;
+    state.continueCuePulse = false;
+    cueTimer = window.setTimeout(function () {
+      revealContinueCue();
+    }, HIGHLIGHT_DELAY);
+  }
+
   function fillOverlayBody(lines) {
     els.overlayBody.textContent = "";
     lines.forEach(function (line) {
@@ -624,9 +668,12 @@
     clearTimers();
     state.phase = STATES.ALL_CASES;
     state.targetVisible = false;
+    state.continueCue = false;
+    state.continueCuePulse = false;
     worklistApi.setActiveWorklist(state.worklist, "allCases");
     renderAll();
     announce(TRAINING_COPY.allTitle + ". " + TRAINING_COPY.all.join(" "));
+    scheduleContinueCue();
     const continueBtn = els.actions.querySelector("button");
     if (continueBtn) {
       continueBtn.focus();
@@ -641,18 +688,24 @@
     clearTimers();
     state.phase = STATES.QUICK_CHECK;
     state.targetVisible = true;
+    state.continueCue = false;
+    state.continueCuePulse = false;
     worklistApi.setActiveWorklist(state.worklist, "pending");
     els.simulator.classList.remove("is-deemphasized");
     if (!prefersReducedMotion()) {
       state.tabCuePulse = true;
+      state.panelCuePulse = true;
     }
+    state.panelCue = true;
     renderAll();
-    if (state.tabCuePulse) {
+    if (state.tabCuePulse || state.panelCuePulse) {
       pulseTimer = window.setTimeout(function () {
         state.tabCuePulse = false;
+        state.panelCuePulse = false;
         document.querySelectorAll(".worklist-tab.is-training-target").forEach(function (target) {
           target.classList.remove("is-pulsing");
         });
+        els.taskBox.classList.remove("is-pulsing");
       }, 800);
     }
     announce(TRAINING_COPY.checkTitle + " " + TRAINING_COPY.check.join(" ") + " " + TRAINING_COPY.checkNext);
@@ -669,6 +722,8 @@
     clearTimers();
     state.phase = STATES.COMPLETE;
     state.targetVisible = false;
+    state.panelCue = false;
+    state.panelCuePulse = false;
     worklistApi.setActiveWorklist(state.worklist, "allCases");
     els.simulator.classList.add("is-deemphasized");
     renderAll();
@@ -721,6 +776,10 @@
     state.phase = STATES.ORIENTING;
     state.targetVisible = false;
     state.tabCuePulse = false;
+    state.continueCue = false;
+    state.continueCuePulse = false;
+    state.panelCue = false;
+    state.panelCuePulse = false;
     state.worklist = worklistApi.createWorklistState("pending");
     els.live.textContent = "";
     renderAll();

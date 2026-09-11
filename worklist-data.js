@@ -70,6 +70,8 @@
         showVisitLink: true,
         reviewer: "unassigned",
         assignedTeam: "Coding",
+        financialClass: "Medicaid HMO",
+        coded: "Feb 1, 2022 by Minerva Wallins",
         activity: "Documentation updated Sep 7, 2026 by SmarterDx"
       },
       {
@@ -88,6 +90,8 @@
         showVisitLink: true,
         reviewer: "unassigned",
         assignedTeam: "CDI",
+        financialClass: "Medicare Advantage",
+        coded: "Feb 1, 2022 by Bob Fields",
         activity: "Last activity Jun 24, 2023 by SmarterDx"
       },
       {
@@ -110,6 +114,8 @@
         showVisitLink: false,
         reviewer: "unassigned",
         assignedTeam: "CDI",
+        financialClass: "Medicare",
+        coded: "Feb 1, 2022 by Scott Wilson",
         activity: "Last activity Jun 26, 2025 by SmarterDx"
       }
     ],

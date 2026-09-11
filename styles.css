@@ -211,6 +211,7 @@ button {
 
 .guidance-actions {
   margin-top: 18px;
+  padding: 4px 2px;
 }
 
 .guidance-btn {
@@ -231,6 +232,22 @@ button {
 
 .guidance-btn:hover {
   filter: brightness(1.05);
+}
+
+.guidance-btn.is-training-target {
+  box-shadow: 0 0 0 3px rgba(255, 172, 55, 0.9);
+}
+
+.guidance-btn.is-training-target.is-pulsing {
+  animation: continue-cue-pulse 0.7s ease-out 1;
+}
+
+.task-box.is-attention-cue {
+  box-shadow: 0 0 0 3px rgba(125, 100, 252, 0.7);
+}
+
+.task-box.is-attention-cue.is-pulsing {
+  animation: panel-cue-pulse 0.7s ease-out 1;
 }
 
 .progress-list {
@@ -304,6 +321,24 @@ button {
   }
   100% {
     box-shadow: 0 0 0 8px rgba(255, 172, 55, 0);
+  }
+}
+
+@keyframes continue-cue-pulse {
+  0% {
+    box-shadow: 0 0 0 3px rgba(255, 172, 55, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(255, 172, 55, 0);
+  }
+}
+
+@keyframes panel-cue-pulse {
+  0% {
+    box-shadow: 0 0 0 3px rgba(125, 100, 252, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 8px rgba(125, 100, 252, 0);
   }
 }
 
@@ -1007,8 +1042,13 @@ button {
     animation: none !important;
   }
 
-  .worklist-tab.is-training-target {
+  .worklist-tab.is-training-target,
+  .guidance-btn.is-training-target {
     box-shadow: 0 0 0 3px var(--solar-gold);
+  }
+
+  .task-box.is-attention-cue {
+    box-shadow: 0 0 0 3px rgba(125, 100, 252, 0.7);
   }
 
   .simulator-panel.is-deemphasized .product-app {
